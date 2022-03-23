@@ -20,6 +20,9 @@ inline = [
       
     # Instalamos microk8s
       "sudo snap install microk8s --classic",
+    # Damos permisos al usuario
+    "sudo usermod -a -G microk8s ${var.user}",
+    "sudo chown -f -R ${var.user} ~/.kube",
 
     # Arrancamos cluster
     "sudo microk8s.start",
