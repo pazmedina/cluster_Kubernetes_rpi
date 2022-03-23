@@ -1,7 +1,4 @@
-# Definicion variables de entrada
-variable "pw_root" {}
-variable "user" {}
-variable "key" {}
+
 
 locals {
   nodes = {
@@ -17,5 +14,4 @@ locals {
     }
   }
 
-}
 }
