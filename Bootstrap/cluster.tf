@@ -27,4 +27,6 @@ locals {
 
 }
 
-
+provider "kubernetes" {
+  host = var.locals.master.ip_addr
+}
