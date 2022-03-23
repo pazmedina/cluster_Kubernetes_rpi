@@ -21,14 +21,26 @@ inline = [
     # Instalamos microk8s
       "sudo snap install microk8s --classic",
     # Damos permisos al usuario
-    "sudo usermod -a -G microk8s ${var.user}",
-    "sudo chown -f -R ${var.user} ~/.kube",
+      "sudo usermod -a -G microk8s ${var.user}",
+      "sudo chown -f -R ${var.user} ~/.kube",
 
     # Arrancamos cluster
-    "sudo microk8s.start",
+       "sudo microk8s.start",
 
     # Creamos masters
-    "sudo microk8s.add-node"
+       "sudo microk8s.add-node",
+
+    # Instalamos helm
+       "sudo snap install helm --classic",
+
+    # Añadimos Addons
+       "sudo microk8s enable ingress",
+       "sudo microk8s enable dashboard",
+       "sudo microk8s enable dns",
+       "sudo microk8s enable storage",
+
+    # Reiniciamos el sistema
+      "sudo shutdown -r +0"
 ]
 
 }
@@ -58,8 +70,10 @@ inline = [
       "sudo snap install microk8s --classic",
 
     # Unir nodo al cluster como workers  
-      "sudo microk8s join ${var.token} --worker"
-   
+     # "sudo microk8s join ${var.token} --worker",
+
+   # REiniciamos el sistema
+      "sudo shutdown -r +0"
 ]
 
 }
