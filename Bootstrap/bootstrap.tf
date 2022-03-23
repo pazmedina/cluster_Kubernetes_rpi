@@ -20,9 +20,12 @@ inline = [
       
     # Instalamos microk8s
       "sudo snap install microk8s --classic",
- 
+
     # Arrancamos cluster
-     # "sudo microk8s.start"
+    "sudo microk8s.start"
+
+    # Creamos masters
+    "sudo microk8s.add-node"
 ]
 
 }
