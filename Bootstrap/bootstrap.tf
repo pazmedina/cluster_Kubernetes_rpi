@@ -1,5 +1,5 @@
 resource "null_resource" "cluster_bootstrap" {
-  for_each = local.nodes
+  for_each = local.master
   connection {
     type        = "ssh"
     user        = var.user
@@ -20,8 +20,9 @@ inline = [
       
     # Instalamos microk8s
       "sudo snap install microk8s --classic",
+ 
     # Arrancamos cluster
-      "sudo microk8s.start"
+     # "sudo microk8s.start"
 ]
 
 }
