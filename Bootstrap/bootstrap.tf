@@ -7,3 +7,11 @@ resource "null_resource" "cluster_bootstrap" {
     host        = each.value.ip_addr
   }
 }
+
+provisioner "remote-exec" {
+inline = [
+      "echo ${var.pw_root} | sudo -S apt-get update",
+      "sudo apt-get install -y curl",
+]
+
+}
