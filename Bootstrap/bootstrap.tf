@@ -50,7 +50,9 @@ inline = [
       
     # Instalamos microk8s
       "sudo snap install microk8s --classic",
- 
+
+    # Unir nodo al cluster como workers  
+      "sudo microk8s join ${var.token} --worker"
    
 ]
 
