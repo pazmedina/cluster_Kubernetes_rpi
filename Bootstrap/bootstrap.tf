@@ -6,7 +6,7 @@ resource "null_resource" "cluster_bootstrap" {
     private_key = file("~/.ssh/${var.key}")
     host        = each.value.ip_addr
   }
-}
+
 
 provisioner "remote-exec" {
 inline = [
@@ -14,4 +14,5 @@ inline = [
       "sudo apt-get install -y curl",
 ]
 
+}
 }
