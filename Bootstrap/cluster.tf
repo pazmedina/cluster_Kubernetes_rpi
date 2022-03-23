@@ -6,6 +6,9 @@ locals {
       role     = ["controlplane", "worker", "etcd"]
       }
   }
+  controlplane = {
+    }
+  }
   workers = {
      node01 = {
       hostname = "Kubenode01"
