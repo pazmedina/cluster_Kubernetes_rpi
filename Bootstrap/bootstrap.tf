@@ -19,7 +19,7 @@ inline = [
       "if ! grep -qP 'cgroup_memory=1' /boot/firmware/cmdline.txt; then sudo sed -i.bck '$s/$/ cgroup_memory=1/' /boot/firmware/cmdline.txt; fi",
       
     # Instalamos microk8s
-      "sudo snap install microk8s --classic"
+      "sudo snap install microk8s --classic",
     # Arrancamos cluster
       "sudo microk8s.add-node"
 ]
