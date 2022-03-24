@@ -1,11 +1,17 @@
-provider "kubernetes" {
-  config_path    = "~/.kube/config"
-  config_context = "my-context"
+terraform {
+  required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.0.0"
+    }
+  }
 }
-
-resource "kubernetes_namespace" "test_namespace" {
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+resource "kubernetes_namespace" "test" {
   metadata {
-    name = "my-first-namespace"
+    name = "nginx"
   }
 }
 resource "kubernetes_deployment" "test" {
@@ -35,6 +41,23 @@ resource "kubernetes_deployment" "test" {
           }
         }
       }
+    }
+  }
+}
+resource "kubernetes_service" "test" {
+  metadata {
+    name      = "nginx"
+    namespace = kubernetes_namespace.test.metadata.0.name
+  }
+  spec {
+    selector = {
+      app = kubernetes_deployment.test.spec.0.template.0.metadata.0.labels.app
+    }
+    type = "NodePort"
+    port {
+      node_port   = 30201
+      port        = 80
+      target_port = 80
     }
   }
 }
