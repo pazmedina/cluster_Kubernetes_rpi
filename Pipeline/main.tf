@@ -3,7 +3,7 @@ provider "kubernetes" {
   config_context = "my-context"
 }
 
-resource "kubernetes_namespace" "test" {
+resource "kubernetes_namespace" "test_namespace" {
   metadata {
     name = "my-first-namespace"
   }
