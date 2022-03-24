@@ -1,10 +1,3 @@
-terraform {
-  required_providers {
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-    }
-  }
-}
 
 
 locals {
@@ -27,6 +20,3 @@ locals {
 
 }
 
-provider "kubernetes" {
-  host = var.locals.master.ip_addr
-}
