@@ -16,7 +16,7 @@ resource "kubernetes_namespace" "test" {
 }
 resource "kubernetes_deployment" "test" {
   metadata {
-    name      = "nginx"
+    name      = "nginx_test"
     namespace = kubernetes_namespace.test.metadata.0.name
   }
   spec {
