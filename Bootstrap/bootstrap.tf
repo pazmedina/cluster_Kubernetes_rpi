@@ -18,12 +18,17 @@ inline = [
       "if ! grep -qP 'cgroup_enable=memory' /boot/firmware/cmdline.txt; then sudo sed -i.bck '$s/$/ cgroup_enable=memory/' /boot/firmware/cmdline.txt; fi",
       "if ! grep -qP 'cgroup_memory=1' /boot/firmware/cmdline.txt; then sudo sed -i.bck '$s/$/ cgroup_memory=1/' /boot/firmware/cmdline.txt; fi",
       
+    # Instalacion snap
+      "sudo snap download core",
+
     # Instalamos microk8s
       "sudo snap install microk8s --classic",
+
     # Damos permisos al usuario
       "sudo usermod -a -G microk8s ${var.user}",
       "sudo chown -f -R ${var.user} ~/.kube",
 
+ 
     # Arrancamos cluster
        "sudo microk8s.start",
 
@@ -31,13 +36,11 @@ inline = [
       " sudo microk8s add-node | grep 'microk8s join 192.168.1.142' -m 1 >> ~/token",
 
     # Instalamos helm
-       "sudo snap install helm --classic",
+    #   "sudo snap install helm --classic",
 
     # Añadimos Addons
-       "sudo microk8s enable ingress",
-       "sudo microk8s enable dashboard",
-       "sudo microk8s enable dns",
-       "sudo microk8s enable storage",
+       "sudo microk8s enable ingress dashboard dns prometheus",
+  
 
     # Reiniciamos el sistema
       "sudo shutdown -r +0"
@@ -47,6 +50,7 @@ inline = [
 }
 
 resource "null_resource" "cluster_bootstrap_workers" {
+  
   for_each = local.workers
   connection {
     type        = "ssh"
@@ -65,9 +69,16 @@ inline = [
     # Realizamos modificaciones en el fichero /boot/firmware/cmdline.txt
       "if ! grep -qP 'cgroup_enable=memory' /boot/firmware/cmdline.txt; then sudo sed -i.bck '$s/$/ cgroup_enable=memory/' /boot/firmware/cmdline.txt; fi",
       "if ! grep -qP 'cgroup_memory=1' /boot/firmware/cmdline.txt; then sudo sed -i.bck '$s/$/ cgroup_memory=1/' /boot/firmware/cmdline.txt; fi",
-      
+    
+    # Instalacion snap
+      "sudo snap download core",
+
     # Instalamos microk8s
       "sudo snap install microk8s --classic",
+ 
+    # Damos permisos al usuario
+      "sudo usermod -a -G microk8s ${var.user}",
+      "sudo chown -f -R ${var.user} ~/.kube",
 
     # Unir nodo al cluster como workers  
      # "sudo microk8s join ${var.token} --worker",
