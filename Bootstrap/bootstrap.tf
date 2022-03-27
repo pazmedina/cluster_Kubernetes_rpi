@@ -41,6 +41,8 @@ inline = [
     # Añadimos Addons
        "sudo microk8s enable ingress dashboard dns prometheus",
   
+    # Publicamos la url para acceder desde fuera del cluster
+    #"sudo microk8s.kubectl --namespace monitoring port-forward --address 0.0.0.0 svc/grafana 3000:3000",
 
     # Reiniciamos el sistema
       "sudo shutdown -r +0"
