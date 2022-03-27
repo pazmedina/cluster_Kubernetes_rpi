@@ -33,7 +33,7 @@ inline = [
        "sudo microk8s.start",
 
     # Creamos masters
-      " sudo microk8s add-node | grep 'microk8s join 192.168.1.142' -m 1 >> ~/token",
+      var.token = " sudo microk8s add-node | grep 'microk8s join 192.168.1.142' -m 1",
 
     # Instalamos helm
     #   "sudo snap install helm --classic",
