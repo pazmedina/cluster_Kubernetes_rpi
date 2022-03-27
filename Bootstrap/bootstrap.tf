@@ -59,7 +59,7 @@ resource "null_resource" "cluster_bootstrap_workers" {
     host        = each.value.ip_addr
   }
 
-
+depends_on = [null_resource.cluster_bootstrap_master]
 provisioner "remote-exec" {
 inline = [
     #Actualizar los nodos del cluster
