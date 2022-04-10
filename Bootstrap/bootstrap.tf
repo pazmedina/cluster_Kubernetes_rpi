@@ -83,7 +83,7 @@ inline = [
       "sudo chown -f -R ${var.user} ~/.kube",
 
     # Unir nodo al cluster como workers  
-     # "sudo microk8s join ${var.token} --worker",
+      "sudo microk8s join ${var.token} --worker",
 
    # REiniciamos el sistema
       "sudo shutdown -r +0"
